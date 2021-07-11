@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oven Hill Restaurant</title>
+    <link rel="stylesheet" href="oh.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <link href='https://fonts.googleapis.com/css?family=Almendra SC' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Amita' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Shojumaru' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Julee' rel='stylesheet'>
+    <!--javascript-->
+    <script type="text/Javascript">
+        function validate()
+        {
+          if(document.form1.table.value=="-1")
+          {
+              return false;
+          }
+          if(document.form1.person.value=="-1")
+          {
+              alert("Please select people");
+              return false;
+          }
+        }
+        $(document).ready(function() {
+            $("#contact").click(function() {
+                console.log($("#contactname").val());
+                console.log($("#contactemail").val());
+                console.log($("#msg").val());
+                var name = $("#contactname").val();
+                var email = $("#contactemail").val()
+                var msg = $("#msg").val()
+                var sendInfo = {
+                    name: name,
+                    email: email,
+                    msg: msg
+                };
+                console.log("check22" + $("#msg").val())
+
+                $.ajax({
+                    type: "POST",
+                    url: "content/saveContact.php",
+                    dataType: "json",
+                    data:sendInfo,
+                    success: function (msg) {
+                        console.log(msg + "test");
+                        $("#contactname").val('');
+                        $("#contactemail").val('');
+                        $("#msg").val('');
+                        alert("Contact information has been saved and sent successfully");
+
+                    }
+
+                });
+                console.log("check3")
+                return false;
+            });
+            $("#bookings").click(function() {
+                console.log($("#name").val());
+                console.log($("#bookingdate").val());
+                console.log($("#t").val());
+                var name = $("#name").val();
+                var bookingdate = $("#bookingdate").val()
+                var t = $("#t").val()
+                var per = $("#per").val()
+                var sendInfo = {
+                    name: name,
+                    bookingdate: bookingdate,
+                    t: t,
+                    per:per
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "content/saveBooking.php",
+                    dataType: "json",
+                    data:sendInfo,
+                    success: function (msg) {
+                        $("#name").val('');
+                        $("#bookingdate").val('');
+                        $("#t").val('');
+                        $("#per").val('');
+                        alert("Booking Info has been saved and sent successfully");
+
+                    }
+
+                });
+                console.log("check3")
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+    <!--Navigation-->
+    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+        <div class="container-fluid">
+            <a href="#ovenhill" style="font-family: Almendra SC; font-size: 50px; color: crimson;">Oven Hill<span style="font-size: 30px; color: black;">Restaurant</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#aboutus" class="nav-link">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#menu" class="nav-link">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#booking" class="nav-link">Booking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contactus" class="nav-link">Contact us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--header-->
+    <!--carousel-->
+    <div id="slides" class="carousel slide" data-ride="carousel">
+        <ul class="carousel-indicators">
+            <li data-target="#slides" data-slide-to="0" class="active"></li>
+            <li data-target="#slides" data-slide-to="1"></li>
+            <li data-target="#slides" data-slide-to="2"></li>
+        </ul>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="img/c1.jpg" alt="c1" class="d-block w-100" width="1400px" height="500px">
+            </div>
+            <div class="carousel-item">
+                <img src="img/c2.jpg" alt="c2" class="d-block w-100" width="1400px" height="500px">
+            </div>
+            <div class="carousel-item">
+                <img src="img/c3.jpg" alt="c3" class="d-block w-100" width="1400px" height="500px">
+            </div>
+
+            <a class="carousel-control-prev" href="#slides" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#slides" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>    
+        </div>
+    </div><br><br>
+
+    <div class="container">
+        <div class="demo">
+            <p>Some of the main dishes in Oven Hill</p><br>
+        </div>
+        
+        <div class="row">
+            <div class="col-6 col-md-3 col-sm-6 col-xs-12">
+                <img src="img/ch1.jpg" alt="ch1" class="d-block w-100" width="250px" height="250px">
+                <p style="text-align: center; font-size: larger;">Chicken fry</p>
+            </div>
+            <div class="col-6 col-md-3 col-sm-6 col-xs-12">
+                <img src="img/ch2.jpg" alt="ch2" class="d-block w-100" width="250px" height="250px">
+                <p style="text-align: center; font-size: larger;">Chicken lollipop</p>
+            </div>
+            <div class="col-6 col-md-3 col-sm-6 col-xs-12">
+                <img src="img/ch3.jpeg" alt="ch3" class="d-block w-100" width="250px" height="250px">
+                <p style="text-align: center; font-size: larger;">Chicken tikka</p>
+            </div>
+            <div class="col-6 col-md-3 col-sm-6 col-xs-12">
+                <img src="img/ch4.jpg" alt="ch4" class="d-block w-100" width="250px" height="250px">
+                <p style="text-align: center; font-size: larger;">Chicken popcorn</p>
+            </div>    
+        </div>
+
+        <div class="row">
+            <div class="col-6 col-md-3 col-sm-6 col-xs-12">
+                <img src="img/fs1.jpg" alt="fs1" class="d-block w-100" width="250px" height="250px">
+                <p style="text-align: center; font-size: larger;">Fish fry</p>
+            </div>
+            <div class="col-6 col-md-3 col-sm-6 col-xs-12">
+                <img src="img/fs2.jpg" alt="fs2" class="d-block w-100" width="250px" height="250px">
+                <p style="text-align: center; font-size: larger;">Apollo fish</p>
+            </div>
+            <div class="col-6 col-md-3 col-sm-6 col-xs-12">
+                <img src="img/fs3.jpg" alt="fs3" class="d-block w-100" width="250px" height="250px">
+                <p style="text-align: center; font-size: larger;">Fish curry</p>
+            </div>
+            <div class="col-6 col-md-3 col-sm-6 col-xs-12">
+                <img src="img/pr1.jpg" alt="pr1" class="d-block w-100" width="250px" height="250px">
+                <p style="text-align: center; font-size: larger;">Prawns roast</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 col-md-3 col-sm-6 col-xs-12">
+                <img src="img/pr2.jpg" alt="pr2" class="d-block w-100" width="250px" height="250px">
+                <p style="text-align: center; font-size: larger;">Prawns fry</p>
+            </div>
+            <div class="col-6 col-md-3 col-sm-6 col-xs-12">
+                <img src="img/pr3.jpg" alt="pr3" class="d-block w-100" width="250px" height="250px">
+                <p style="text-align: center; font-size: larger;">Prawns curry</p>
+            </div>
+            <div class="col-6 col-md-3 col-sm-6 col-xs-12">
+                <img src="img/ma1.jpg" alt="ma1" class="d-block w-100" width="250px" height="250px">
+                <p style="text-align: center; font-size: larger;">Manchuria</p>
+            </div>
+            <div class="col-6 col-md-3 col-sm-6 col-xs-12">
+                <img src="img/cr2.png" alt="cr2" class="d-block w-100" width="250px" height="250px">
+                <p style="text-align: center; font-size: larger;">Crab curry</p><br><br>
+            </div>
+        </div>
+    </div>
+
+    <!--aboutus-->
+    <div class="container" id="aboutus">
+        <p style="text-align: center; font-size: 40px; font-family: 'Shojumaru';">About us</p><br>
+        
+        <div class="row">
+            <div class= "col-md-6">
+                <p style="color: sandybrown; font-size: 35px; font-family: Julee;">Our Story</p>
+                <h2 style="font-size: 35px; font-family: Georgia, 'Times New Roman', Times, serif;">Welcome to Oven Hill Restaurant</h3>
+                <p>Oven Hill Restaurant is a grand and passionate journey of flavours, unraveling authentic cuisines and sharing them with the world. It started as a tiny restaurant created by a bunch of foodies for some more foodie friends and even after 129 renowned restaurants and confectionaries and eight award winning cuisines, we are proud to say it still remains a Restaurant Group by the foodies, to the foodies and for the foodies.</p>
+                <p>Because at the heart of the group lies the passion, and the weakness for good food that turned into a great strength for Oven Hill Restaurant.It is the group's mission to share with diners authentic and unique cuisines from the world over. To give them a never-before experience and make them 'Feel Special'.</p>
+                <p>The group has always striven to go to great lengths to pamper and surprise patrons and ensure that every dining experience they have, is memorable. From sourcing ingredients from far-off lands to attentive service, it's all done with one objective - to give diners an experience they will cherish forever.</p>
+            </div>
+            <div class="col-md-6">
+                <img src="img/ab1.jpg" alt="ab1" class="d-block w-100" height="300px" width="600px" style="border-radius: 10px;"><br><br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="img/ab2.jpg" alt="ab2" class="d-block w-100" height="200px" width="300px" style="border-radius: 10px;">
+                    </div>
+                    <div class="col-md-6">
+                        <img src="img/ab3.jpg" alt="ab3" class="d-block w-100" height="200px" width="300px" style="border-radius: 10px;"><br><br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--menu-->
+    <div class="container" id="menu">
+       <p style="color: sandybrown; font-size: 35px; font-family: Julee; text-align: center;">Tasty & Spicy Recipes</p>
+       <p style="font-size: 30px; font-family: Georgia, 'Times New Roman', Times, serif; text-align: center;">Our Menu</p>
+    
+            <div class="row">
+                <div class="col-md-6">
+                    <p style="text-align: center; font-size: 30px; color: sandybrown; font-family: Georgia, 'Times New Roman', Times, serif;">Strater</p>
+                    <p>Chicken fry <span style="padding-left: 400px;">Rs 210</span></p><hr>
+                    <p>Chilli chicken <span style="padding-left: 390px;">Rs 240</span></p><hr>
+                    <p>Prawns roast <span style="padding-left: 390px;">Rs 300</span></p><hr>
+                    <p>Fish fry <span style="padding-left: 430px;">Rs 320</span></p><hr>
+                    <p>Chicken roast <span style="padding-left: 390px;">Rs 210</span></p><hr>
+                    <p>Chicken lollipop <span style="padding-left: 370px;">Rs 240</span></p><hr>
+                    <p>Prawns fry <span style="padding-left: 410px;">Rs 300</span></p><hr>
+                    <p>Apollo fish <span style="padding-left: 410px;">Rs 320</span></p>
+                </div>
+                <div class="col-md-6">
+                    <p style="text-align: center; font-size: 30px; color: sandybrown; font-family: Georgia, 'Times New Roman', Times, serif;">Main course</p>
+                    <p>Chicken biryani <span style="padding-left: 380px;">Rs 300</span></p><hr>
+                    <p>Prawns biryani <span style="padding-left: 380px;">Rs 320</span></p><hr>
+                    <p>Mutton biryani <span style="padding-left: 380px;">Rs 340</span></p><hr>
+                    <p>Mushroom biryani <span style="padding-left: 350px;">Rs 300</span></p><hr>
+                    <p>Chicken Friedrice <span style="padding-left: 360px;">Rs 300</span></p><hr>
+                    <p>Panner biryani <span style="padding-left: 380px;">Rs 300</span></p><hr>
+                    <p>Crab curry <span style="padding-left: 410px;">Rs 350</span></p><hr>
+                    <p>Mixed biryani <span style="padding-left: 390px;">Rs 400</span></p><br><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p style="text-align: center; font-size: 30px; color: sandybrown; font-family: Georgia, 'Times New Roman', Times, serif;">Drinks</p>
+                    <p>Coke <span style="padding-left: 450px;">Rs 60</span></p><hr>
+                    <p>Fanta <span style="padding-left: 450px;">Rs 50</span></p><hr>
+                    <p>Lemonade <span style="padding-left: 410px;">Rs 80</span></p><hr>
+                    <p>Fresh Citrus <span style="padding-left: 400px;">Rs 70</span></p><hr>
+                    <p>Dry Lemon <span style="padding-left: 410px;">Rs 80</span></p><hr>
+                    <p>Ginger ale <span style="padding-left: 420px;">Rs 70</span></p><hr>
+                </div>
+                <div class="col-md-6">
+                    <p style="text-align: center; font-size: 30px; color: sandybrown; font-family: Georgia, 'Times New Roman', Times, serif;">Dessert</p>
+                    <p>Butterscotch <span style="padding-left: 400px;">Rs 150</span></p><hr>
+                    <p>Mixed berry <span style="padding-left: 400px;">Rs 200</span></p><hr>
+                    <p>Mango & Coconut <span style="padding-left: 350px;">Rs 250</span></p><hr>
+                    <p>Sliced cake <span style="padding-left: 400px;">Rs 300</span></p><hr>
+                    <p>Sponge cake <span style="padding-left: 390px;">Rs 350</span></p><hr>
+                    <p>Red Velvet <span style="padding-left: 400px;">Rs 300</span></p><hr><br><br>
+                </div>
+            </div>         
+    </div>
+
+    <!--booking-->
+    <div class="container" id="booking">
+        <p style="color: sandybrown; font-size: 50px; font-family: Julee; text-align: center;">Booking</p>
+        <p style="font-size: 25px; font-family: Georgia, 'Times New Roman', Times, serif; text-align: center;">Confirm your table before you arrive</p>
+        <div style="margin-left:10%;padding:1px 16px;">
+        <form name="form1" method="post" onsubmit="return validate(this);">
+            <div class="form-group">
+                 <label for="name"><b>Name:</b></label>
+                 <input type="text" class="form-control" id="name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+                 <label for="bookingdate"><b>Date&Time:</b></label>
+                 <input type="datetime-local" class="form-control" id="bookingdate" required>
+            </div>
+            <div class="form-group">
+                 <label for="t"><b>Table:</b></label>
+                      <select name="table" class="form-control" id="t">
+                          <option value="-1" selected>select--</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                          <option value="13">13</option>
+                          <option value="14">14</option>
+                          <option value="15">15</option>
+                          <option value="16">16</option>
+                          <option value="17">17</option>
+                          <option value="18">18</option>
+                          <option value="19">19</option>
+                          <option value="20">20</option>
+                          <option value="21">21</option>
+                          <option value="22">22</option>
+                          <option value="23">23</option>
+                          <option value="24">24</option>
+                          <option value="25">25</option>
+                          <option value="26">26</option>
+                          <option value="27">27</option>
+                          <option value="28">28</option>
+                          <option value="29">29</option>
+                          <option value="30">30</option>
+                      </select>
+            </div>
+            <div class="form-group">
+                <label for="per"><b>No. of Persons:</b></label>
+                      <select name="person" class="form-control" id="per">
+                          <option value="-1" selected>select--</option>
+                          <option value="1">1 person</option>
+                          <option value="2">2 people</option>
+                          <option value="3">3 people</option>
+                          <option value="4">4 people</option>
+                          <option value="5">5 people</option>
+                          <option value="6">6 people</option>
+                          <option value="7">7 people</option>
+                          <option value="8">8 people</option>
+                          <option value="9">9 people</option>
+                          <option value="10">10 people</option>
+                          <option value="11">11 people</option>
+                          <option value="12">12 people</option>
+                          <option value="13">13 people</option>
+                          <option value="14">14 people</option>
+                          <option value="15">15 people</option>
+                     </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" id="bookings" class="btn btn-danger" value="Book"><br><br><br>
+            </div>
+        </form>
+        </div>
+    </div>
+
+    <!--contact us-->
+    <div class="container" id="contactus">
+        <p style="color: sandybrown; font-size: 50px; font-family: Julee; text-align: center;">Contact us</p>
+        <p style="color: darkslategrey; text-align: center; font-size: larger;">Have a question for us <br><span style="font-family: Georgia, 'Times New Roman', Times, serif; color: black; font-size: xx-large;">CONTACT US TODAY</span></p><hr>
+        <p style="text-align: center; font-size: 20px;">Phone: 9786785856</p><br>
+        <form action="" method="post">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                       <input type="text" class="form-control" placeholder="Your name" required>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Email" required>
+                    </div>      
+                </div>
+            </div><br>
+            <div class="form-group">
+                <textarea name="msg" class="form-control" id="demo1" cols="140" rows="5" placeholder="Message" required></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" id="send" value="Send" class="btn btn-dark">
+            </div>
+        </form> 
+    </div>
+    
+   
+</body>
+</html>
